@@ -97,10 +97,7 @@ lblsM <- paste(m_Mujeres$clase, " Clase: ",m_Mujeres$porcentaje,"%",sep="");
 #Se dibuja los cada uno de las subconjuntos obtenidos
 nf<-layout(matrix(c(1,2), 1, 2, byrow=TRUE),respect=TRUE);
 pie(m_Hombres$x,labels = lblsH, col=rainbow(length(lblsH)),main="% Hombres-Clase");
-pie(m_Mujeres$x,labels = lblsM, col=rainbow(length(lblsM)),main="% Mujeres-Clase");
-
-#Se almacena el archivo de salida
-write.csv(df, "C:/Users/Usuario-03/Titanic_data_clean.csv");       
+pie(m_Mujeres$x,labels = lblsM, col=rainbow(length(lblsM)),main="% Mujeres-Clase");     
        
 # ANÁLISIS ESTADISTICO
 #==CREACION DEL ARBOL==
@@ -169,3 +166,6 @@ plot(dfc, col = cl$cluster);
 plot(dfc$Pclass, df$Age,col=cl$cluster,xlab='Pclass',ylab='Age');
 #Se grafica el cluster de la Edad VS si sobrevive o no
 plot(dfc$Age, df$Survived,col=cl$cluster,xlab='Age',ylab='Survived');
+
+#Se almacena el archivo de salida
+write.csv(dfc, "C:/Users/Usuario-03/Titanic_data_clean.csv");  
