@@ -12,7 +12,7 @@ library(car)
 df <- read.csv("C:/Users/Usuario-03/train.csv");
 
 # ====CARACTERISTICAS DE LOS DATOS ===
-# Dimensión del dataset
+# DimensiÃ³n del dataset
 dim (df);
 
 # Tipo de dato asignado a cada campo
@@ -21,7 +21,7 @@ sapply(df, function(x) class(x))
 # Resumen de datos
 summary(df);
 
-# Eliminación de campos
+# EliminaciÃ³n de campos
 df <- df[, -(7:11)];  # campos: SibSp,Parch,Ticket,Fare,Cabin
 df <- df[, -(4)];     # campo Name
 df <- df[, -(1)];     # campo PassengerId
@@ -32,7 +32,7 @@ sapply(df, function(x) sum(is.na(x)));
 df$Age[is.na(df$Age)];
 df$Embarked[is.na(df$Embarked)];
 
-# Inputación de valore nulos
+# InputaciÃ³n de valore nulos
 suppressWarnings(suppressMessages(library(VIM)));
 df$Age<-kNN(df)$Age;
 df$Embarked<-kNN(df)$Embarked;
@@ -44,7 +44,7 @@ boxplot.stats(df$Sex)$out;
 boxplot.stats(df$Age)$out;
 boxplot.stats(df$Embarked)$out;
 
-# Gráfica de las Frecuencias de cada una de las variables del dataset
+# GrÃ¡fica de las Frecuencias de cada una de las variables del dataset
 nf<-layout(matrix(c(1,2,3,4,5,5), 2, 3, byrow=TRUE),respect=TRUE);
 barplot(prop.table(table(df$Sex)),ylim=c(0,0.7), main="(a) Sexo");
 barplot(prop.table(table(df$Pclass)),ylim=c(0,0.7), main="(b) Clase");
@@ -52,7 +52,7 @@ barplot(prop.table(table(df$Survived)),ylim=c(0,0.7), main="(c) Sobrevivencia");
 barplot(prop.table(table(df$Embarked)),ylim=c(0,1), main="(d) Embarque");
 barplot(prop.table(table(df$Age)),ylim=c(0,0.05), main="(e) Edades");
 
-# Comparación de varianzas
+# ComparaciÃ³n de varianzas
 var <- fligner.test(df);
 var;
 
@@ -99,18 +99,21 @@ nf<-layout(matrix(c(1,2), 1, 2, byrow=TRUE),respect=TRUE);
 pie(m_Hombres$x,labels = lblsH, col=rainbow(length(lblsH)),main="% Hombres-Clase");
 pie(m_Mujeres$x,labels = lblsM, col=rainbow(length(lblsM)),main="% Mujeres-Clase");
 
-# ANÁLISIS ESTADISTICO
+#Se almacena el archivo de salida
+write.csv(df, "C:/Users/Usuario-03/Titanic_data_clean.csv");       
+       
+# ANÃLISIS ESTADISTICO
 #==CREACION DEL ARBOL==
 nf<-layout(matrix(c(1), 1, byrow=TRUE),respect=TRUE);
 datos2p=as.data.frame(df);
 datosp=datos2p[,2:5];
 # El campo SURVIVED se convierte a tipo factor
 datosp$Survived=as.factor(datos2p$Survived);
-# Creación el árbol
+# CreaciÃ³n el Ã¡rbol
 arbol<- rpart(Survived ~., data=datosp, method="class");
-# Gráfico del árbol
+# GrÃ¡fico del Ã¡rbol
 rpart.plot(arbol, type=3, extra=101, fallen.leaves=T);
-# Resumen del árbol
+# Resumen del Ã¡rbol
 arbol;
 
 #==============CREACION DE LAS CLUSTER
@@ -128,20 +131,20 @@ dfc <- dfc[, -5];
 dfc$Sex=str_replace_all(dfc$Sex,"female","1");
 dfc$Sex=str_replace_all(dfc$Sex,"male","2");
 dfc$Sex=as.integer(dfc$Sex);
-#niño=1, adolecente=2, joven=3, adulto=4, mayor=5
+#niÃ±o=1, adolecente=2, joven=3, adulto=4, mayor=5
 dfc$Age=cut(dfc$Age, breaks = c(0.40,12,18,30,50,81), 
     labels = c(1, 2, 3, 4, 5))
 dfc$Age=as.integer(dfc$Age);
 summary(dfc);
 
-#Se selecciona el número adecuado de grupos
+#Se selecciona el nÃºmero adecuado de grupos
 vec_distancias=kmeans(dfc,centers=1)$betweenss;
 vec_distancias2=kmeans(dfc,centers=1)$tot.withinss;
 for (i in 1:10) {
   vec_distancias[i]<-kmeans(dfc,centers=i)$betweenss;
   vec_distancias2[i]<-kmeans(dfc,centers=i)$tot.withinss;
 }
-plot (vec_distancias2, type='b',xlab='Número de cluster', 
+plot (vec_distancias2, type='b',xlab='NÃºmero de cluster', 
       ylab='Suma de cuadrados inter-grupos',col = 'blue');
 lines(vec_distancias, type='b',col = 'green');
 
@@ -150,8 +153,8 @@ cl <- kmeans(dfc, 4);
 #Se presenta las caracteristicas del cluster
 cl;
 
-cl$iter #Número de iteraciones para generar los grupos
-cl$size #Tamaño de los grupos
+cl$iter #NÃºmero de iteraciones para generar los grupos
+cl$size #TamaÃ±o de los grupos
 disst <- daisy(dfc); #distancia entre observaciones
 #Distancia inter-grupos
 cluster.stats(disst,cl$cluster)$average.between;
