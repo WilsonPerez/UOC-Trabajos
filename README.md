@@ -22,7 +22,7 @@ El dataset de análisis describe la información de los pasajeros a bordo del Ti
 <LI> Fare.- Tarifa del pasaje.
 <LI> Embarked.- Puerto de embarcación del pasajero (C - Cherbourg, Q - Queenstown, S - Southampton).
 <LI> Cabin.- Identificador de la cabina en el que viajo el pasajero.
-<UL>
+</UL>
   
  <h2>Dataset Salida</h2>
 El dataset de salida posee la información limpia y estructurada, formada por los siguientes campos:
@@ -33,7 +33,7 @@ El dataset de salida posee la información limpia y estructurada, formada por lo
 <LI> Sex.- Almacena la información relacionada al sexo del pasajero (male -Hombre, female - Mujer)
 <LI> Age.- Describe la categoría de la edad del pasajero (Niño=1, Adolecente=2, Joven=3, Adulto=4, Mayor=5)
 <LI> Embarked.- Puerto de embarcación del pasajero (1 - Cherbourg, 2 - Queenstown, 3 - Southampton).
-<UL>
+</UL>
  
 <h2>Recursos</h2>
 <UL>
@@ -42,4 +42,4 @@ Scraping the Data.
 <LI>Simon Munzert, Christian Rubba, Peter Meißner, Dominic Nyhuis. (2015).
 Automated Data Collection with R: A Practical Guide to Web Scraping and Text
 Mining. John Wiley & Sons.
-<UL>
+</UL>
